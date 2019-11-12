@@ -1,0 +1,12 @@
+(library (name TailwindPpxTest) (public_name tailwind-ppx.test)
+    (modules (:standard \ TailwindPpxTestPesyModules))
+    (libraries tailwind-ppx.test.pesy-modules)
+    (flags -linkall -g -w -9 -open TailwindPpxTestPesyModules))
+(library (public_name tailwind-ppx.test.pesy-modules)
+    (name TailwindPpxTestPesyModules) (modules TailwindPpxTestPesyModules)
+    (libraries rely.lib tailwind-ppx.library))
+(rule
+    (with-stdout-to TailwindPpxTestPesyModules.re
+        (run echo
+             "module Library = TailwindPpxLibrary;\
+            \nmodule Rely = Rely;")))

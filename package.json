@@ -1,0 +1,55 @@
+{
+  "name": "tailwind-ppx",
+  "version": "0.1.0",
+  "description": "Starter Reason Esy Pesy Project",
+  "esy": {
+    "build": "refmterr dune build -p #{self.name}",
+    "NOTE": "Optional release Section. Customizes result of `esy release`",
+    "release": { "releasedBinaries": [ "TailwindPpxApp.exe" ] },
+    "buildEnv": { "ODOC_SYNTAX": "re" }
+  },
+  "buildDirs": {
+    "test": {
+      "imports": [
+        "Library = require('tailwind-ppx/library')",
+        "Rely = require('rely/lib')"
+      ],
+      "flags": [ "-linkall", "-g", "-w", "-9" ]
+    },
+    "testExe": {
+      "imports": [ "Test = require('tailwind-ppx/test')" ],
+      "bin": { "RunTailwindPpxTests.exe": "RunTailwindPpxTests.re" }
+    },
+    "library": {
+      "imports": [
+        "Console = require('console/lib')", "Pastel = require('pastel/lib')"
+      ]
+    },
+    "bin": {
+      "imports": [ "Library = require('tailwind-ppx/library')" ],
+      "bin": { "TailwindPpxApp.exe": "TailwindPpxApp.re" }
+    }
+  },
+  "scripts": {
+    "start": "esy x TailwindPpxApp.exe",
+    "test": "esy x RunTailwindPpxTests.exe",
+    "doc": "esy dune build @doc",
+    "doc-path": "esy echo #{self.target_dir}/default/_doc/_html/index.html"
+  },
+  "dependencies": {
+    "@esy-ocaml/reason": "*",
+    "@opam/dune": "*",
+    "@opam/ocaml-migrate-parsetree": "1.4.0",
+    "@opam/ppx_tools_versioned": "5.2.3",
+    "@opam/ppxlib": "*",
+    "@opam/tablecloth-native": "0.0.6",
+    "@reason-native/rely": "*",
+    "ocaml": "~4.6.1",
+    "refmterr": "*"
+  },
+  "devDependencies": {
+    "@opam/merlin": "*",
+    "ocaml": "~4.6.1",
+    "@opam/odoc": "*"
+  }
+}

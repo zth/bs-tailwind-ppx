@@ -1,0 +1,11 @@
+(executable (name RunTailwindPpxTests)
+    (modules (:standard \ TailwindPpxTestExePesyModules))
+    (public_name RunTailwindPpxTests.exe)
+    (libraries tailwind-ppx.testExe.pesy-modules)
+    (flags -open TailwindPpxTestExePesyModules))
+(library (public_name tailwind-ppx.testExe.pesy-modules)
+    (name TailwindPpxTestExePesyModules)
+    (modules TailwindPpxTestExePesyModules) (libraries tailwind-ppx.test))
+(rule
+    (with-stdout-to TailwindPpxTestExePesyModules.re
+        (run echo "module Test = TailwindPpxTest;")))

@@ -1,0 +1,11 @@
+(executable (name TailwindPpxApp)
+    (modules (:standard \ TailwindPpxBinPesyModules))
+    (public_name TailwindPpxApp.exe)
+    (libraries tailwind-ppx.bin.pesy-modules)
+    (flags -open TailwindPpxBinPesyModules))
+(library (public_name tailwind-ppx.bin.pesy-modules)
+    (name TailwindPpxBinPesyModules) (modules TailwindPpxBinPesyModules)
+    (libraries tailwind-ppx.library ocaml-migrate-parsetree ppxlib str))
+(rule
+    (with-stdout-to TailwindPpxBinPesyModules.re
+        (run echo "module Library = TailwindPpxLibrary;")))

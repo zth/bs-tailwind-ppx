@@ -1,0 +1,14 @@
+(library (name TailwindPpxLibrary) (public_name tailwind-ppx.library)
+    (modules (:standard \ TailwindPpxLibraryPesyModules))
+    (libraries tailwind-ppx.library.pesy-modules)
+    (flags -open TailwindPpxLibraryPesyModules)
+    (preprocess (pps ppxlib.metaquot)))
+(library (public_name tailwind-ppx.library.pesy-modules)
+    (name TailwindPpxLibraryPesyModules)
+    (modules TailwindPpxLibraryPesyModules)
+    (libraries ocaml-migrate-parsetree ppxlib str tablecloth-native)
+    (preprocess (pps ppxlib.metaquot)))
+(rule
+    (with-stdout-to TailwindPpxLibraryPesyModules.re
+        (run echo  "module Console = Console;\
+                  \nmodule Pastel = Pastel;")))
