@@ -27,9 +27,7 @@ describe("validating CSS strings", ({test, _}) => {
       "bg-blaack text-red-100"
       |> Library.Util.validateCssStr(~loc=makeMockLocObj())
     ).
-      toThrowException(
-      Ppxlib.Location.Error({msg: ""}),
-    )
+      toThrow()
   );
 
   test("errors on duplicate class names", ({expect}) =>
