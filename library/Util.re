@@ -18,7 +18,9 @@ let tcssExtension =
     (~loc, ~path as _, cssStr) => {
     switch (errorInCssString(cssStr)) {
     | None => Ast_builder.Default.estring(~loc, cssStr)
-    | Some(message) => Location.raise_errorf(~loc, "%s", message)
+    | Some(message) =>
+      %expr
+      [%ocaml.error [%e Ast_builder.Default.estring(~loc, message)]]
     }
   });
 
