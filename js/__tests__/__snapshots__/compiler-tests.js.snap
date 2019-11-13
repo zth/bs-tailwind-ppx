@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Compiler tests processCss processes the CSS and returns the result 1`] = `
+".bg-black-100 {
+  background-color: black;
+}
+            "
+`;
