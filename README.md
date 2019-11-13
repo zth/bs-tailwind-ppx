@@ -1,6 +1,6 @@
 # bs-tailwind
 
-_Just an experiment_. Requires BuckleScript 6.
+_Just an experiment, unusable as of now_. Requires BuckleScript 6.
 
 ## Idea
 
@@ -21,6 +21,15 @@ The JSON file is created by using `bs-tailwind.js`, which is a small script that
 - [ ] Validate that no duplicate class names are used
 - [ ] Validate that only one class name from a single category (think `bg-`) is used.
 - [ ] Validate that necessary dependent/parent classes are used (think classes setting flex properties without using the class `flex`)
+
+## Plan going forward
+
+I won't be able to work on this for a little while, but the plan going forward is as follows:
+
+- [ ] Extend the `bs-tailwind.js` script to properly extract class names (the logic is a bit flawed right now and doesn't account for pseudo-selectors), extract whatever parent the specific class needs, and extract what actual property it's setting (so we can validate that you only have one specific class setting a specific property)
+- [ ] Extending the PPX to save the parsed and marshalled `bs-tailwind.json` to a cache directory, and then load that cached output for working with the actual output (copy the logic from `graphql_ppx` which does specifically that)
+- [ ] Extend the PPX to implement all validation rules using the generated rules file
+- [ ] Ensure proper location reporting if possible
 
 ## Developing
 
