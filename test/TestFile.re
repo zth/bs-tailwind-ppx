@@ -15,26 +15,17 @@ let makeMockLocObj = (): Ppxlib.Location.t => {
 
 describe("validating CSS strings", ({test, _}) => {
   test("returns Ok when everything is fine", ({expect}) =>
-    expect.result(
-      "bg-black text-red-100"
-      |> Library.Util.validateCssStr(~loc=makeMockLocObj()),
-    ).
-      toBeOk()
+    expect.option("bg-black text-red-100" |> Library.Util.errorInCssString).
+      toBeNone()
   );
 
   test("errors on invalid class names", ({expect}) =>
-    expect.fn(() =>
-      "bg-blaack text-red-100"
-      |> Library.Util.validateCssStr(~loc=makeMockLocObj())
-    ).
-      toThrow()
+    expect.option("bg-blaack text-red-100" |> Library.Util.errorInCssString).
+      toBeSome()
   );
 
   test("errors on duplicate class names", ({expect}) =>
-    expect.fn(() =>
-      "bg-black bg-black"
-      |> Library.Util.validateCssStr(~loc=makeMockLocObj())
-    ).
-      toThrow()
+    expect.option("bg-black bg-black" |> Library.Util.errorInCssString).
+      toBeSome()
   );
 });
